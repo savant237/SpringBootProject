@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.savant.SpringBootProject.exception.TodoNotFoundException;
 import com.savant.SpringBootProject.model.Todo;
 import com.savant.SpringBootProject.service.TodoService;
 
@@ -27,7 +28,11 @@ public class TodoController {
 	
 	@GetMapping(path="/users/{name}/todos/{id}")
 	public Todo retrieveTodo(@PathVariable String name,@PathVariable int id) {
-		return todoService.retrieveTodo(id);
+		Todo todo = todoService.retrieveTodo(id);
+		if(todo == null) {
+			throw new TodoNotFoundException("Todo Not Found");
+		}
+		return todo;
 	}
 	
 	@PostMapping("/users/{name}/todos")
@@ -38,6 +43,12 @@ public class TodoController {
 		}
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdTodo.getId()).toUri();
 		return ResponseEntity.created(location).build();
+	}
+	
+	//dummy service that throw an exception
+	@GetMapping(path="/users/dummy-service")
+	public Todo errorService(){
+		throw new RuntimeException("Some Exception Occured");
 	}
 
 }
