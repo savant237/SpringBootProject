@@ -30,7 +30,7 @@ public class TodoControllerIT {
 		String expected = "["
 				+"{id:1,user:Jack,desc:\"Learn Spring MVC\", done:false}"+","
 				+"{id:2,user:Jack,desc:\"Learn Struts\", done:false}"+"]";
-		String uri = "/user/Jack/todos";
+		String uri = "/users/Jack/todos";
 		ResponseEntity<String> response = template.getForEntity(createUrl(uri), String.class);
 		JSONAssert.assertEquals(expected, response.getBody(), false);
 	}

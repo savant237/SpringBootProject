@@ -46,7 +46,7 @@ public class TodoControllerTest {
 		mockList.add(new Todo(2,"Jack","Learn Struts", new Date(),false));
 		when(service.retrieveTodos(anyString())).thenReturn(mockList);
 		
-		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/user/Jack/todos")
+		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/users/Jack/todos")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status()
 				.isOk()).andReturn();
