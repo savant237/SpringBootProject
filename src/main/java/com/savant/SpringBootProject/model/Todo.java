@@ -2,9 +2,14 @@ package com.savant.SpringBootProject.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Todo {
   private int id;
+  @NotNull
   private String user;
+  @Size(min=9, message="Enter atleast 10 Characters")
   private String desc;
   private Date targetDate;
   private boolean isDone;

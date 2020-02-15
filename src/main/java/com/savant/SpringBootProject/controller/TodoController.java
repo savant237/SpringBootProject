@@ -3,6 +3,8 @@ package com.savant.SpringBootProject.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -50,7 +52,7 @@ public class TodoController {
 	}
 	
 	@PostMapping("/users/{name}/todos")
-	ResponseEntity<?> add(@PathVariable String name, @RequestBody Todo todo) {
+	ResponseEntity<?> add(@PathVariable String name,@Valid @RequestBody Todo todo) {
 		Todo createdTodo = todoService.addTodo(name, todo.getDesc(), todo.getTargetDate(), todo.isDone());
 		if(createdTodo == null) {
 			return ResponseEntity.noContent().build();

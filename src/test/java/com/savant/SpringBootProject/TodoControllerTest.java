@@ -81,5 +81,17 @@ public class TodoControllerTest {
 				.andExpect(status().isCreated())
 				.andExpect(header().string("location",containsString("/users/Jack/todos/"+CREATE_TODO_ID))).andReturn();
 	}
+	
+	@Test
+	public void createTodo_withValidatorError() throws Exception {
+		int CREATE_TODO_ID =7;
+		Todo mockTodo = new Todo(CREATE_TODO_ID,"Jack","Learn Spring MVC", new Date(),false);
+		String todo = "{\"user\":\"Jack\",\"desc\":\"Learn\", \"done\":false}";
+		when(service.addTodo(anyString(),anyString(),isNull(),anyBoolean())).thenReturn(mockTodo);
+		mvc.perform(MockMvcRequestBuilders.post("/users/Jack/todos")
+				.content(todo)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().is4xxClientError()).andReturn();
+	}
 
 }
