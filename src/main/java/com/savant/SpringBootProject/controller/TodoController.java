@@ -20,11 +20,22 @@ import com.savant.SpringBootProject.exception.TodoNotFoundException;
 import com.savant.SpringBootProject.model.Todo;
 import com.savant.SpringBootProject.service.TodoService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Contact;
+
 @RestController
+
 public class TodoController {
 	@Autowired
 	private TodoService todoService;
-	
+	//Customize Swagger
+		@ApiOperation(
+		  value = "Retrieve all todos for a user by passing in his name",
+		  notes = "A list of matching todos is returned. Current pagination is not supported.",
+		  response = Todo.class,
+		  responseContainer = "List",
+		  produces = "application/json")
+		
 	@GetMapping("/users/{name}/todos")
 	public List<Todo> retrieveTodos(@PathVariable String name) {
 		return todoService.retrieveTodos(name);
