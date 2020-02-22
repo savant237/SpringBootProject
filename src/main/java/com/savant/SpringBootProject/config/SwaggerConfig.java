@@ -29,9 +29,7 @@ public class SwaggerConfig {
               "Spring Boot REST API for Todo Service",
               "1.0",
               "Terms of service",
-              new Contact("Savant Dhindsa", "https://springframework.guru/about/", "savii237@gmail.com"),
-             "Apache License Version 2.0",
-              "https://www.apache.org/licenses/LICENSE-2.0");
+              new Contact("Savant Dhindsa", "http://linkedin.com/in/savant-singh-dhindsa", "savii237@gmail.com"),"Mastering Spring 5.0","www.packt.com");
       return apiInfo;
 }
 }
